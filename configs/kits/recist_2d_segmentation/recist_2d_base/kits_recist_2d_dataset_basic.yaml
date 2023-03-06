@@ -1,0 +1,71 @@
+# Data Configuration ##########################################################
+dataset:
+    dataset_name_list: ['train', 'test']
+    train:
+        instance:
+            name: RECIST2DBasic
+            root: path_to_kits19_recist_dataset
+            effective_percent: 1.0
+            data_type: train
+            augmentation_seq_hook:
+                name: classical_RECIST2D_augmentation
+                input_size: [ 512, 512 ]
+            normalize_fn_hook:
+                name: window_level_normalize
+                level: 200
+                window: 400
+            reverse_normalize_fn_hook:
+                name: reverse_window_level_normalize
+            reverse_transform_fn_hook:
+                name: basic_resize_mask_transform
+            calculate_reverse_transform_meta_hook:
+                name: basic_resize_mask_transform
+    test:
+        instance:
+            name: RECIST2DBasic
+            root: path_to_kits19_recist_dataset
+            effective_percent: 1.0
+            data_type: test
+            augmentation_seq_hook:
+                name: basic_resize
+                input_size: [512, 512]
+            normalize_fn_hook:
+                name: window_level_normalize
+                level: 200
+                window: 400
+            reverse_normalize_fn_hook:
+                name: reverse_window_level_normalize
+            reverse_transform_fn_hook:
+                name: basic_resize_mask_transform
+            calculate_reverse_transform_meta_hook:
+                name: basic_resize_mask_transform
+
+
+evaluation:
+    effect: True
+    gt_need: ['gt_mask', 'gt_recist_pts']
+    dataset:
+        dataset_name_list: ['test']
+        test:
+            instance:
+                name: RECIST2DBasic
+                root: path_to_kits19_recist_dataset
+                effective_percent: 1.0
+                data_type: 'test'
+            taskAbs:
+                name: FullSupv
+                run_mode: eval
+            # Dataloader Configuration
+            dataloader:
+                n_workers: 0
+                batch_size: 1
+    evaluator:
+        dice_eval:
+            effect: True
+            write: False
+            gt_key: 'gt_mask'
+            pred_key: 'pred_mask'
+            func_para:
+                threshold: 0.5
+
+

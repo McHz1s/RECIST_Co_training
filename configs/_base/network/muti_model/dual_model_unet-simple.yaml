@@ -1,0 +1,9 @@
+_Base_Config: 'configs/_base/network/muti_model/single_model_unet-simple.yaml'
+# Model Configuration #########################################################
+network:
+    name_list: ['UNet', 'UNet']
+    post_process:
+        name: MultiModelBinarySemanticSegmentationPostProcess
+        model_weight_list: [0.5, 0.5]
+        mask_threshold: 0.5
+

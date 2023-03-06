@@ -1,0 +1,15 @@
+_Base_Config: 'configs/_base/model/swin/swinTBase_with_uperhead.yaml'
+auxiliary_head:
+    type: 'FCNHead'
+    in_channels: 512
+    in_index: 2
+    channels: 256
+    num_convs: 1
+    concat_input: False
+    dropout_ratio: 0.1
+    num_classes: 1
+    norm_cfg:
+        type: 'BN'
+        requires_grad: True
+    align_corners: False
+

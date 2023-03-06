@@ -1,0 +1,34 @@
+_Base_Config: "configs/kits/recist_2d_segmentation/kits_unet_dual.yaml"
+# GPU #########################################################################
+gpus: '0'
+# Running Configuration ######################################################
+run:
+    run_type: test
+    ############################################################################
+    task: kt-dual-seg-test/unet_test
+    FP16: False
+
+    # Resume from checkpoint
+    resume:  'resume_model_path'
+
+# Data Configuration ##########################################################
+dataset:
+    dataset_name_list: ['test']
+
+    # Dataloader Configuration
+    test:
+        dataloader:
+          n_workers: 0
+          batch_size:
+            test: 1
+
+evaluation:
+    effect: True
+    gt_need: ['gt_mask']
+    save_csv_logger: True
+    evaluator:
+        dice_eval:
+            effect: True
+            cfg:
+                threshold: 0.5
+                write: True

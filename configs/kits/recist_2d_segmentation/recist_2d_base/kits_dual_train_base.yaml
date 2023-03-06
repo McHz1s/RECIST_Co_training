@@ -1,0 +1,16 @@
+_Base_Config: ['configs/_base/runner/dual_consistency/basic_dual_wss_semantic_segmentation.yaml']
+
+# Runner #########################################################################
+runner: dual_seg_runner
+
+# Data Configuration ##########################################################
+dataset:
+    dataset_name_list: ['train']
+
+
+# Running Configuration ######################################################
+run:
+    train_dataset: ['train']
+
+valid:
+    valid_dataset: []

@@ -1,0 +1,14 @@
+# Model Configuration #########################################################
+network:
+    name: MutiParallelModel
+    pretrained_path: None
+    pretrained: False
+    strict: False
+    name_list: ['HNN']
+    HNN:
+        backbone: resnet50
+    post_process:
+        name: MultiModelBinarySemanticSegmentationPostProcess
+        mask_threshold: 0.5
+        model_weight_list: [1]
+

@@ -1,0 +1,29 @@
+_Base_Config: ['configs/kits/recist_2d_segmentation/recist_2d_base/kits_dual_dataset.yaml',
+                                'configs/_base/network/muti_model/dual_model_hnn-r50.yaml',
+                                'configs/kits/recist_2d_segmentation/recist_2d_base/kits_dual_train_base.yaml']
+# GPU #########################################################################
+gpus: '7'
+
+# Runner #########################################################################
+runner: dual_seg_runner
+
+# Data Configuration ##########################################################
+dataset:
+    dataset_name_list: ['train']
+    train:
+        # Dataloader Configuration
+        dataloader:
+          n_workers: 32
+          batch_size: 16
+
+
+# Running Configuration ######################################################
+run:
+    n_epoch: 600
+    ############################################################################
+    task: kt-dual-seg-hnn/FB
+
+    loss:
+        name: CoSegLoss
+        cfg:
+            epoch_delay: 250

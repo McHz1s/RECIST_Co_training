@@ -1,0 +1,27 @@
+_Base_Config: ['configs/kits/recist_2d_segmentation/recist_2d_base/kits_dual_dataset.yaml',
+                                'configs/_base/network/muti_model/dual_model_unet-r50.yaml',
+                                'configs/kits/recist_2d_segmentation/recist_2d_base/kits_dual_train_base.yaml']
+# GPU #########################################################################
+gpus: '7'
+
+# Runner #########################################################################
+runner: dual_seg_runner
+
+# Data Configuration ##########################################################
+dataset:
+    # Dataloader Configuration
+    train:
+      dataloader:
+        n_workers: 32
+        batch_size: 10
+
+
+# Running Configuration ######################################################
+run:
+    n_epoch: 1000
+    ############################################################################
+    task: kt-dual-seg-arunet/FB
+
+    loss:
+        cfg:
+            epoch_delay: 300

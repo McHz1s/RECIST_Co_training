@@ -1,0 +1,42 @@
+# Running Configuration ######################################################
+run:
+    n_epoch:
+    ############################################################################
+    task: temp/temp
+    save_path: 'path_to_save_logger/{}/{}' # do not delete this brace
+    FP16: True
+    save_epoch: '[50 * i for i in range(10, 600)]'
+
+    gpu_input_need_dict:
+        float: [ 'img' ]
+
+    gpu_target_need_dict:
+        float: [ 'supv_mask' ]
+    # Optmizer Configuration
+    optimizer:
+        name: AdamW
+        # Params of optimizer
+        lr: 6.0e-5
+        weight_decay: 0.01
+        paramwise_cfg:
+            custom_keys:
+                absolute_pos_embed: {decay_mult: 0.}
+                'relative_position_bias_table': {decay_mult: 0.}
+                'norm': {decay_mult: 0.}
+
+    # LR Schedule Configuration
+    lr_schedule:
+        name: multi_step
+        # Params of Scheduler
+        milestones: [500]
+
+    loss:
+        name: MultiSegHeadLoss
+        cfg:
+            weight: [1.0, 0.4]
+            single_head_loss:
+                name:  FullSupervisedLoss
+                cfg:
+                    supv_loss: dice_loss
+                    model_num: 1
+                    supv_loss_weight_list: [1]

@@ -1,0 +1,17 @@
+_Base_Config: 'configs/_base/runner/dual_consistency/basic_fully_supervised_semantic_segmentation_swinTrans.yaml'
+# Running Configuration ######################################################
+run:
+    loss:
+        name: MultiSegHeadLoss
+        cfg:
+            weight: [1.0, 0.4]
+            single_head_loss:
+                name:  CoSegLoss
+                cfg:
+                    supv_loss: dice_loss
+                    cons_loss: dice_loss
+                    cons_delay: -1
+                    epoch_delay: 500
+                    model_num: 2
+                    weight: [1, 0.4]
+

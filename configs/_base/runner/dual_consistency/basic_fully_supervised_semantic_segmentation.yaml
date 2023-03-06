@@ -1,0 +1,44 @@
+# Running Configuration ######################################################
+run:
+    n_epoch: 1000
+    ############################################################################
+    task: temp/temp
+    save_path: 'path_to_save_logger/{}/{}'
+    FP16: True
+    save_epoch: '[50 * i for i in range(10, 600)]'
+
+    # Optmizer Configuration
+    optimizer:
+        name: Adamax
+        # Params of optimizer
+        lr: 0.001
+        weight_decay: 0.0001
+
+    # LR Schedule Configuration
+    lr_schedule:
+        name: multi_step
+        # Params of Scheduler
+        milestones: [500]
+        gamma: 0.5
+        warmup_epochs: 5
+        warmup_mode: linear
+        warmup_ratio: 0.3333
+
+    gpu_input_need_dict:
+        float: [ 'img' ]
+
+    gpu_target_need_dict:
+        float: [ 'supv_mask' ]
+
+    loss:
+        name:  FullSupervisedLoss
+        cfg:
+            supv_loss: dice_loss
+            model_num: 1
+            supv_loss_weight_list: [1]
+
+    monitor: ['dice']
+
+# Validation Configuration ######################################################
+valid:
+    n_valid_per_epoch: -1

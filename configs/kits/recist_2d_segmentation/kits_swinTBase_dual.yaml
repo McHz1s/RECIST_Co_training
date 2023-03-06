@@ -1,0 +1,24 @@
+_Base_Config: ['configs/kits/recist_2d_segmentation/recist_2d_base/kits_dual_dataset.yaml',
+               'configs/_base/network/muti_model/dual_model_swinTBase.yaml',
+                'configs/kits/recist_2d_segmentation/recist_2d_base/kits_dual_swin_train_base.yaml']
+# GPU #########################################################################
+gpus: '1'
+
+# Runner #########################################################################
+runner: dual_seg_runner
+
+# Data Configuration ##########################################################
+dataset:
+    dataset_name_list: ['train']
+    # Dataloader Configuration
+    train:
+        dataloader:
+          n_workers: 12
+          batch_size: 6
+
+# Running Configuration ######################################################
+run:
+    n_epoch: 600
+    # checkpoint###############################################################
+    task: kt-dual-seg-swinTB/FB
+    clean_gpu_each_epoch: True

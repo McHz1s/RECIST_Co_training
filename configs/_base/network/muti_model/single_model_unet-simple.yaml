@@ -1,0 +1,17 @@
+# Model Configuration #########################################################
+network:
+    name: MutiParallelModel
+    pretrained_path: None
+    pretrained: False
+    strict: False
+    name_list: ['UNet']
+    UNet:
+        n_channels: 1
+        n_classes: 1
+        bilinear: True
+    post_process:
+        module_path: wss.muti_model_post_process
+        name: MultiModelBinarySemanticSegmentationPostProcess
+        mask_threshold: 0.5
+        model_weight_list: [1]
+

@@ -1,0 +1,19 @@
+# Model Configuration #########################################################
+network:
+    name: UncertaintyMeanTeacher2DWeaklySeg
+    pretrained_path: 'pretrained_model_path/swin_base_patch4_window7_224.pth'
+    pretrained: True
+    strict: False
+    convert_pretrained: SwinTConvert
+    uncertain_estimation:
+        effect: True
+        name: AugUncertainEstimation
+    alpha: 0.999
+    model_name: 'MSTfamily'
+    MSTfamily:
+        _Base_Config: 'configs/_base/model/swinTBase_with_uperhead_fcnhead.yaml'
+    post_process:
+        name: MeanTeacherPostProcess
+        mask_threshold: 0.6
+        model_weight_list: [1]
+

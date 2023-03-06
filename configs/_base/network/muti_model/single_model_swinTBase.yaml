@@ -1,0 +1,15 @@
+# Model Configuration #########################################################
+network:
+    name: MutiParallelModel
+    pretrained_path: path_to_pretrained_model/upernet_swin_base_patch4_window7_512x512.pth
+    pretrained: True
+    strict: False
+    convert_pretrained: MSTConvert
+    name_list: ['MSTfamily']
+    MSTfamily:
+        _Base_Config: 'configs/_base/model/swin/swinTBase_with_uperhead_fcnhead.yaml'
+    post_process:
+        name: MultiModelBinarySemanticSegmentationPostProcess
+        mask_threshold: 0.5
+        model_weight_list: [1]
+

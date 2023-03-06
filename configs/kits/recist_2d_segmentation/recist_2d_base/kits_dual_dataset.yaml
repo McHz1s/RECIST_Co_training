@@ -1,0 +1,25 @@
+_Base_Config: ['configs/kits/recist_2d_segmentation/recist_2d_base/kits_recist_2d_dataset_basic.yaml']
+
+# Runner #########################################################################
+runner: seg_runner
+
+# Data Configuration ##########################################################
+dataset:
+    dataset_name_list: ['train', 'test']
+    train:
+        taskAbs:
+            name: DualWSS
+            input_size: [ 512, 512 ]      # 511|767
+            output_size: [ 512, 512 ]     # 128|192
+            run_mode: train
+            geometry_mask_name_list: ['diamond', 'circle']
+            dual_mask_construct_way: from_ori_recist
+
+    test:
+        taskAbs:
+            name: DualWSS
+            input_size: [ 512, 512 ]      # 511|767
+            output_size: [ 512, 512 ]     # 128|192
+            run_mode: test
+            geometry_mask_name_list: ['diamond', 'circle']
+            dual_mask_construct_way: from_ori_recist

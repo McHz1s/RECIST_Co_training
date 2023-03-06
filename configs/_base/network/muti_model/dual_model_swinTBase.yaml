@@ -1,0 +1,13 @@
+_Base_Config: 'configs/_base/network/muti_model/single_model_swinTBase.yaml'
+# Model Configuration #########################################################
+network:
+    name: MutiParallelModel
+    name_list: ['MSTfamily', 'MSTfamily']
+    MSTfamily:
+        type: 'EncoderDecoder'
+        backbone:
+            use_checkpoint: True
+    post_process:
+        name: MultiModelBinarySemanticSegmentationPostProcess
+        model_weight_list: [0.5, 0.5]
+        mask_threshold: 0.5

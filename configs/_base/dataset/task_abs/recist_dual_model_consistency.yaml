@@ -1,0 +1,23 @@
+# Data Configuration ##########################################################
+dataset:
+    train:
+        taskAbs:
+            name: DualWSS
+            run_mode: train
+            input_size: [512, 512]      # 511|767
+            output_size: [512, 512]     # 128|192
+            geometry_mask_name_list: [ 'diamond', 'circle' ]
+        valid:
+            taskAbs:
+                name: DualWSS
+                run_mode: valid
+                input_size: [ 512, 512 ]      # 511|767
+                output_size: [ 512, 512 ]     # 128|192
+                geometry_mask_name_list: [ 'diamond', 'circle' ]
+        test:
+            taskAbs:
+                name: DualWSS
+                run_mode: valid
+                input_size: [ 512, 512 ]      # 511|767
+                output_size: [ 512, 512 ]     # 128|192
+                geometry_mask_name_list: [ 'diamond', 'circle' ]
