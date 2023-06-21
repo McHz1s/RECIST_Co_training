@@ -12,7 +12,7 @@ Each model has a specialized configuration file located at: `configs/kits/recist
 which inherits some basic common configuration files from `configs/kits/recist_2d_segmentation/recist_2d_base`. 
 To train a specific model, such as UNet, you only need to run the command:
 ```
-    python submit.py --config kits_unet_dual.yaml
+    python submit.py --config configs/kits/recist_2d_segmentation/kits_unet_dual.yaml
 ```
 ## Test the model
 The configuration file for testing the model is located at 
